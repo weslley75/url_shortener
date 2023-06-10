@@ -1,5 +1,6 @@
 import { UserEntity } from "../../user/entity/user";
 import z from "zod";
+import { generateRandomString } from "../utils/link-id-generator";
 
 const linkSchema = z.object({
   id: z.string().min(6).regex(/^[a-zA-Z0-9]+$/),
@@ -31,8 +32,7 @@ export class LinkEntity implements LinkInterface {
 
   constructor(props: LinkProps, id?: string) {
     if (!id) {
-      const id = Math.random().toString(36).slice(6)
-      console.log(id);
+      const id = generateRandomString(6);
       this.id = id;
       this._createdAt = new Date(Date.now());
       this._updatedAt = new Date(Date.now());
