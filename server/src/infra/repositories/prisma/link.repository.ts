@@ -1,7 +1,7 @@
 import { Link, PrismaClient, User } from "@prisma/client";
-import { LinkRepository } from "../../../domain/repositories/link.repository";
+import { LinkRepository } from "../../../domain/link/repository/link.repository";
 import { LinkEntity } from "../../../domain/model/link";
-import { UserEntity } from "../../../domain/model/user";
+import { UserEntity } from "../../../domain/user/entity/user";
 
 type LinkWithUser = Link & { user?: User | null };
 

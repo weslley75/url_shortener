@@ -1,4 +1,4 @@
-import { LinkEntity } from "../model/link";
+import { LinkEntity } from "../entity/link";
 
 export interface LinkRepository {
   create(url: LinkEntity): Promise<LinkEntity>;

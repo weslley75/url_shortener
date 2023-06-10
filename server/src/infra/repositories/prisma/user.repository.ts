@@ -1,5 +1,5 @@
-import { UserRepository } from "../../../domain/repositories/user.repository";
-import { UserEntity } from "../../../domain/model/user";
+import { UserRepository } from "../../../domain/user/repository/user.repository";
+import { UserEntity } from "../../../domain/user/entity/user";
 import { PrismaClient } from "@prisma/client";
 
 export class UserPrismaRepository implements UserRepository {
@@ -74,7 +74,7 @@ export class UserPrismaRepository implements UserRepository {
     });
   }
 
-  async findManyByIds(ids: string[]): Promise<UserEntity[]> {
+  async findManyByIds(...ids: string[]): Promise<UserEntity[]> {
     const users = await this._client.user.findMany({
       where: {
         id: {

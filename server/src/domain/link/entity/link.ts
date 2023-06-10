@@ -1,9 +1,8 @@
-import { UserEntity, userSchema } from "./user";
-import crypto from "node:crypto";
+import { UserEntity } from "../../user/entity/user";
 import z from "zod";
 
 const linkSchema = z.object({
-  id: z.string().uuid(),
+  id: z.string().min(6).regex(/^[a-zA-Z0-9]+$/),
   url: z.string().url(),
   title: z.string().min(3).optional(),
   description: z.string().min(3).optional(),
@@ -32,7 +31,9 @@ export class LinkEntity implements LinkInterface {
 
   constructor(props: LinkProps, id?: string) {
     if (!id) {
-      this.id = crypto.randomUUID();
+      const id = Math.random().toString(36).slice(6)
+      console.log(id);
+      this.id = id;
       this._createdAt = new Date(Date.now());
       this._updatedAt = new Date(Date.now());
     } else {

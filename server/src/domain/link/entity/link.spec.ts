@@ -1,5 +1,5 @@
 import { LinkEntity } from "./link";
-import { UserEntity } from "./user";
+import { UserEntity } from "../../user/entity/user";
 
 const userExample: UserEntity = UserEntity.create({
   name: "John Doe",

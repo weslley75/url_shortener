@@ -1,10 +1,14 @@
-import { LinkEntity } from "../../../domain/model/link";
-import { LinkRepository } from "../../../domain/repositories/link.repository";
+import { LinkRepository } from "../../../domain/link/repository/link.repository";
+import { LinkEntity } from "../../../domain/link/entity/link";
 
 export class LinkInMemoryRepository implements LinkRepository {
   private links: LinkEntity[] = [];
 
   async create(link: LinkEntity): Promise<LinkEntity> {
+    const idExists = await this.findById(link.id);
+    if (idExists) {
+      throw new Error("Link already exists");
+    }
     this.links.push(link);
     return link;
   }

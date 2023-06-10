@@ -19,13 +19,13 @@ model User {
 }
 
 model Link {
-  id          String    @id @default(uuid())
+  id          String    @id
   url         String
   title       String?
   description String?
+  userId      String
+  user        User?     @relation(fields: [userId], references: [id])
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   deletedAt   DateTime?
-  userId      String
-  user        User?     @relation(fields: [userId], references: [id])
 }
