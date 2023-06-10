@@ -24,7 +24,7 @@ export class ValidateLoginUseCase {
     const user = await this.userRepository.findByEmail(email);
 
     if (!user) {
-      throw new Error("User not found");
+      throw new Error("Wrong email or password");
     }
 
     const isPasswordValid = await this.passwordHash.compare(
@@ -33,7 +33,7 @@ export class ValidateLoginUseCase {
     );
 
     if (!isPasswordValid) {
-      throw new Error("Invalid password");
+      throw new Error("Wrong email or password");
     }
 
     return new UserOutputDto(user);

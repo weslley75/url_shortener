@@ -3,11 +3,12 @@ import { UserInMemoryRepository } from "../../../infra/repositories/in-memory/us
 import { PasswordHash } from "../../common/utils/password-hash/password-hash.interface";
 import { UserRepository } from "../repository/user.repository";
 import { CreateUserUseCase } from "./create-user.use-case";
+import { faker } from "@faker-js/faker";
 
 const defaultUser = {
-  name: "Example",
-  email: "example@example.com",
-  password: "123456",
+  name: faker.person.fullName(),
+  email: faker.internet.email(),
+  password: faker.internet.password(),
 };
 
 describe("CreateUserUseCase", () => {
@@ -27,8 +28,6 @@ describe("CreateUserUseCase", () => {
     await useCase.execute(payload);
 
     const user = await repository.findByEmail(payload.email);
-
-    console.log(user?.password);
 
     expect(user).toBeDefined();
     expect(user?.id).toBeDefined();
